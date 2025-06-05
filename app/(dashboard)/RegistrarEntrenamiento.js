@@ -1,9 +1,51 @@
-import {View, Text, TextInput, Pressable} from "react-native"
+import { useState } from "react"
+import {View, Text, TextInput, Pressable, StyleSheet, Platform, Button} from "react-native"
+import DateTimePicker from "@react-native-community/datetimepicker";
+import * as FileSystem from "expo-file-system"
+
 
 export default function RegistrarComponente () {
-  const formater = new Intl.DateTimeFormat('es-EN', {day:"2-digit", month:"2-digit",year:"numeric"})
-  const date = new Date()
-  const fechaFormateada = formater.format(date).toString()
+  
+  
+  
+  const [fecha, setFecha] = useState(new Date())
+  const [distancia, setDistancia] = useState('')
+  const [tiempo, setTiempo] = useState(0);
+  const [show,setShow] = useState(false)
+
+  async function GuardarDatos() {
+    const filePath = FileSystem.documentDirectory+ 'historial.json';
+   
+    // si fecha, distancia y tiempo tenga datos
+    if(fecha && distancia && tiempo){
+      let historial = [];
+      const data = {
+        fecha : fecha,
+        distancia: distancia,
+        tiempo: tiempo
+      }
+
+      try{
+        const file = await FileSystem.readAsStringAsync(filePath)
+
+        if(!file){
+          historial.push(data)
+          await FileSystem.writeAsStringAsync(filePath, JSON.stringify(historial))
+        }
+
+        historial = JSON.parse(file)
+        console.log(historial)
+      } catch (e) {
+        console.log(e)
+      }
+      historial.push(data);
+      await FileSystem.writeAsStringAsync(filePath, JSON.stringify(historial))
+      alert("El datos se guardo correctamente")
+      return
+    }
+    alert('tienes que tener datos para guardar');
+    return
+  }
   
   return (
     <View>
@@ -14,13 +56,23 @@ export default function RegistrarComponente () {
         <Text>
           Fecha:
         </Text>
+        <View>
+          <Button title="Seleccionar fecha" onPress={()=>setShow(true)}/>
+          {fecha&&<Text>{fecha.toDateString()}</Text>}
+        </View>
+        {show&&
+          <DateTimePicker
+            locale='es-ES'
+            value={fecha}
+            mode="date"
+            display={Platform.OS === "ios" ? 'spinner' : 'default'} 
+            onChange={(event, date) => {
+              setShow(false)
+              if(date) setFecha(date)
+            }}
+          />
+        }
 
-        <TextInput
-        readOnly ={true}
-          placeholder={`${date}`}
-          value={fechaFormateada}
-          style = {{borderWidth:1, borderBlockColor:"black", height:50, width:"100%"}}
-        />
       </View>
       <View>
         <Text>
@@ -30,6 +82,7 @@ export default function RegistrarComponente () {
         <TextInput
           keyboardType="numeric"
           style = {{borderWidth:1, borderBlockColor:"black", height:50, width:"100%"}}
+          onChangeText={setDistancia}
         />
       </View>
       <View>
@@ -39,10 +92,11 @@ export default function RegistrarComponente () {
 
         <TextInput
           keyboardType="numeric"
+          onChangeText={setTiempo}
           style = {{borderWidth:1, borderBlockColor:"black", height:50, width:"100%"}}
         />
       </View>
-      <Pressable>
+      <Pressable style={style.btn_guardar} onPress={()=>GuardarDatos()}>
         <Text>
           Guardar
         </Text>
@@ -50,3 +104,11 @@ export default function RegistrarComponente () {
     </View>
   )
 }
+  const style = StyleSheet.create({
+    btn_guardar: {
+      width: "100%",
+      paddingBlock:2,
+      paddingInline:4,
+      backgroundColor:"#2298ff"
+    }
+  });
