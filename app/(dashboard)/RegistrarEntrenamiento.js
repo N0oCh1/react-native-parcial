@@ -12,7 +12,10 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import * as FileSystem from "expo-file-system";
 
 export default function RegistrarComponente() {
+  
+
   const [fecha, setFecha] = useState(new Date());
+  const formattedFecha = `${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()} ${fecha.toLocaleTimeString()}`;
   const [distancia, setDistancia] = useState("");
   const [tiempo, setTiempo] = useState(0);
   const [show, setShow] = useState(false);
@@ -36,7 +39,7 @@ export default function RegistrarComponente() {
     if (fecha && distancia && tiempo) {
       let historial = [];
       const data = {
-        fecha: fecha,
+        fecha: formattedFecha,
         distancia: distancia,
         tiempo: tiempo,
       };
