@@ -1,50 +1,44 @@
 import { useState } from "react"
 import {View, Text, TextInput, Pressable, StyleSheet, Platform, Button} from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker";
-import * as FileSystem from "expo-file-system"
+import * as FileSystem from "expo-file-system";
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 export default function RegistrarComponente () {
   
-  
-  
   const [fecha, setFecha] = useState(new Date())
   const [distancia, setDistancia] = useState('')
-  const [tiempo, setTiempo] = useState(0);
+  const [tiempo, setTiempo] = useState('');
   const [show,setShow] = useState(false)
 
   async function GuardarDatos() {
     const filePath = FileSystem.documentDirectory+ 'historial.json';
-   
-    // si fecha, distancia y tiempo tenga datos
     if(fecha && distancia && tiempo){
       let historial = [];
       const data = {
+        id: uuidv4(),
         fecha : fecha,
         distancia: distancia,
         tiempo: tiempo
       }
 
-      try{
-        const file = await FileSystem.readAsStringAsync(filePath)
-
-        if(!file){
-          historial.push(data)
-          await FileSystem.writeAsStringAsync(filePath, JSON.stringify(historial))
-        }
-
-        historial = JSON.parse(file)
-        console.log(historial)
+        try {
+        const file = await FileSystem.readAsStringAsync(filePath);
+        historial = JSON.parse(file);
       } catch (e) {
-        console.log(e)
+        
       }
+
       historial.push(data);
-      await FileSystem.writeAsStringAsync(filePath, JSON.stringify(historial))
-      alert("El datos se guardo correctamente")
-      return
+      await FileSystem.writeAsStringAsync(filePath, JSON.stringify(historial));
+      alert("El dato se guardó correctamente");
+      return;
     }
-    alert('tienes que tener datos para guardar');
-    return
+    alert('Tienes que tener datos para guardar');
+    return;
   }
   
   return (
@@ -96,11 +90,12 @@ export default function RegistrarComponente () {
           style = {{borderWidth:1, borderBlockColor:"black", height:50, width:"100%"}}
         />
       </View>
-      <Pressable style={style.btn_guardar} onPress={()=>GuardarDatos()}>
+      <Pressable style={style.btn_guardar} onPress={()=> GuardarDatos()}>
         <Text>
           Guardar
         </Text>
       </Pressable>
+      
     </View>
   )
 }

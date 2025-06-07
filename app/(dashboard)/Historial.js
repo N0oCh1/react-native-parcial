@@ -1,23 +1,26 @@
-import {View, Text, ScrollView} from "react-native"
+import {View, Text, ScrollView, StyleSheet, Pressable} from "react-native"
 import * as FileSystem from "expo-file-system"
 import { useEffect, useState } from "react"
 
-
-export default function HistorialComponente () {
+const path = FileSystem.documentDirectory+'historial.json'
+export default function HistorialComponente ({navigation}) {
   const [data, setData] = useState([]);
 
   useEffect (()=>{
     async function obtenerDatos() {
       try{
-        const path = FileSystem.documentDirectory+'historial.json'
         setData(JSON.parse(await FileSystem.readAsStringAsync(path)))
       }catch(e){
         console.log(e)
       }
     }
     obtenerDatos()
-  },[data])
-
+  },[])
+  console.log(data)
+  function BorrarHistorial () {
+    FileSystem.deleteAsync(path).then(()=>setData([])).catch(e=>console.log(e))
+    navigation.replace("VerHistorial")
+  }
 
   return (
     <View>
@@ -42,9 +45,22 @@ export default function HistorialComponente () {
             </View>
           )
         })}
+          <Pressable style={style.btn_guardar} onPress={()=>BorrarHistorial()}>
+            <Text>
+            Borrar Histroial
+            </Text>
+          </Pressable>
         </View>
       </ScrollView>
       }
     </View>
   )
 }
+const style = StyleSheet.create({
+    btn_guardar: {
+      width: "100%",
+      paddingBlock:2,
+      paddingInline:4,
+      backgroundColor:"#2298ff"
+    }
+  });
