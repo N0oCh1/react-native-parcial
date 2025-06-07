@@ -17,26 +17,20 @@ export default function RegistrarComponente() {
   const [tiempo, setTiempo] = useState(0);
   const [show, setShow] = useState(false);
 
-
-function validarDatos (distancia, tiempo){
-  if(!distancia|| isNaN(distancia)||distancia<=0)
-  {
-    alert("distancia debe ser positiva");
-    return false;
+  function validarDatos(distancia, tiempo) {
+    if (!distancia || isNaN(distancia) || distancia <= 0) {
+      alert("distancia debe ser positiva");
+      return false;
+    }
+    if (!tiempo || isNaN(tiempo) || tiempo <= 0) {
+      alert("tiempo debe ser positiva");
+      return false;
+    }
+    return true;
   }
-  if(!tiempo|| isNaN(tiempo)||tiempo<=0)
-  {
-    alert("tiempo debe ser positiva");
-    return false;
-  }
-  return true
-}
 
   async function GuardarDatos() {
-    if (!validarDatos(distancia,tiempo))
-      {
-        return;
-      }
+    if (!validarDatos(distancia, tiempo)) return;
     const filePath = FileSystem.documentDirectory + "historial.json";
     // si fecha, distancia y tiempo tenga datos
     if (fecha && distancia && tiempo) {
@@ -66,7 +60,7 @@ function validarDatos (distancia, tiempo){
       historial.push(data);
       await FileSystem.writeAsStringAsync(filePath, JSON.stringify(historial));
       setFecha(new Date());
-      setDistancia('');
+      setDistancia("");
       setTiempo(0);
       alert("El datos se guardo correctamente");
       return;
@@ -76,14 +70,15 @@ function validarDatos (distancia, tiempo){
   }
 
   return (
-    <View>
-      <Text>Registrar Entrenamiento</Text>
+    <View style={{ alignItems: "center" }}>
+      <Text style={{ fontSize:30, marginBottom:"50"}} >Registrar Entrenamiento</Text>
       <View>
-        <Text>Fecha:</Text>
-        <View>
-          <Button title="Seleccionar fecha" onPress={() => setShow(true)} />
-          {fecha && <Text>{fecha.toDateString()}</Text>}
+        
+        <View style={{ flexDirection:"row", }}>
+          <Text>Fecha:</Text>
+         {fecha && <Text style={{ fontWeight:"bold"}}>{fecha.toDateString()}</Text>}
         </View>
+        <Button title="Seleccionar fecha" onPress={() => setShow(true)} />
         {show && (
           <DateTimePicker
             locale="es-ES"
@@ -97,7 +92,7 @@ function validarDatos (distancia, tiempo){
           />
         )}
       </View>
-      <View>
+      <View style={{width: "80%",margin:10}}>
         <Text>Distancia:</Text>
 
         <TextInput
@@ -112,7 +107,7 @@ function validarDatos (distancia, tiempo){
           onChangeText={setDistancia}
         />
       </View>
-      <View>
+      <View style={{width: "80%", margin:20}}>
         <Text>Tiempo:</Text>
 
         <TextInput
@@ -135,9 +130,11 @@ function validarDatos (distancia, tiempo){
 }
 const style = StyleSheet.create({
   btn_guardar: {
-    width: "100%",
+    width: "80%",
     paddingBlock: 2,
     paddingInline: 4,
     backgroundColor: "#2298ff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
