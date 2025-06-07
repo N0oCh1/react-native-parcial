@@ -1,4 +1,4 @@
-import { Button, Pressable, Text, View } from "react-native";
+import { Button, Pressable, Text, View, StyleSheet } from "react-native";
 import ButtonCompoente from "../../components/ComponentB";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -48,21 +48,24 @@ export default function PrincipalComponent ({navigation}) {
   }
   console.log(kilometrosAcumulados / meta)
 
-  console.log(historial, kilometrosAcumulados)
+  console.log(historial, kilometrosAcumulados, meta)
   return(
-    <View>
-      <Text>
+    <View style={style.container}>
+      <Text style={style.title}>
         Hola, {data ? data + "!": "desconocido !"}
       </Text>
-      <Progress.Bar
-        progress={Math.min(kilometrosAcumulados / meta , 1)}
-        width={200}
-        height={20}
-      />
       {meta && 
+      <View>
         <Text>
           Metas: {meta}KM  {metaCumplida && <Text>Meta cumplida</Text>}
         </Text>
+        <Progress.Bar
+          progress={meta && kilometrosAcumulados ? Math.min(Number(kilometrosAcumulados) / Number(meta) ,1) : 0}
+          width={"100%"}
+          height={20}
+        />
+      </View>
+        
       }
       {
         historial && 
@@ -70,7 +73,6 @@ export default function PrincipalComponent ({navigation}) {
           Kilometros acumulados : {kilometrosAcumulados}
         </Text>
       }
-     
       <Button onPress={()=>navigation.navigate("RegistrarEntrenamieno")} title="Registrar Entrenamiento"/>
       <Button onPress={()=>navigation.navigate("FrasesMotivadoras")} title="Ver Frases Motivadoras"/>
       <Button onPress={()=>navigation.navigate("VerHistorial")} title="Ver Historial"/>
@@ -78,3 +80,19 @@ export default function PrincipalComponent ({navigation}) {
     </View>
   )
 }
+const style = StyleSheet.create({
+  container:{
+    flex:1,
+    gap:12,
+    padding:12
+  },
+  title:{
+    fontSize:40,
+    fontWeight:"bold",
+    marginTop:30,
+    padding:4,
+    borderRadius:16,
+    textAlign: "center",
+    backgroundColor: "#3ef9ff"
+  }
+})

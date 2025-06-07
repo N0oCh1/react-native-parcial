@@ -19,20 +19,24 @@ export default function RegistrarComponente() {
 
 
 function validarDatos (distancia, tiempo){
-if(!distancia|| isNaN(distancia)||distancia<=0)
-{
-  alert("distancia debe ser positiva");
-  return false;
-}
-if(!tiempo|| isNaN(tiempo)||tiempo<=0)
-{
-  alert("tiempo debe ser positiva");
-  return false;
-}
+  if(!distancia|| isNaN(distancia)||distancia<=0)
+  {
+    alert("distancia debe ser positiva");
+    return false;
+  }
+  if(!tiempo|| isNaN(tiempo)||tiempo<=0)
+  {
+    alert("tiempo debe ser positiva");
+    return false;
+  }
+  return true
 }
 
   async function GuardarDatos() {
-    if (!validarDatos(distancia,tiempo))return;
+    if (!validarDatos(distancia,tiempo))
+      {
+        return;
+      }
     const filePath = FileSystem.documentDirectory + "historial.json";
     // si fecha, distancia y tiempo tenga datos
     if (fecha && distancia && tiempo) {
