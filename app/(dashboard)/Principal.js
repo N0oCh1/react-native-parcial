@@ -9,7 +9,6 @@ export default function PrincipalComponent ({navigation}) {
   const [data, setData] = useState("");
   const [meta,setMeta] = useState();
   const [historial, setHistorial] = useState();
-  const [kilometro, setKilometro] = useState();
   let kilometrosAcumulados = 0;
   let metaCumplida = false;
 
@@ -45,9 +44,8 @@ export default function PrincipalComponent ({navigation}) {
   if(kilometrosAcumulados>=meta) {
     metaCumplida = true
   }
-  console.log(Math.min(Number(kilometrosAcumulados) / Number(meta) ,1))
   let progreso = Math.min(Number(kilometrosAcumulados) / Number(meta) ,1)
-  console.log(historial, kilometrosAcumulados, meta)
+ 
   return(
     <View style={style.container}>
       <Text style={style.title}>
