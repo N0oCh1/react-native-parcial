@@ -1,5 +1,4 @@
 import { Button, Pressable, Text, View, StyleSheet } from "react-native";
-import ButtonCompoente from "../../components/ComponentB";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system"
@@ -46,31 +45,29 @@ export default function PrincipalComponent ({navigation}) {
   if(kilometrosAcumulados>=meta) {
     metaCumplida = true
   }
-  console.log(kilometrosAcumulados / meta)
-
+  console.log(Math.min(Number(kilometrosAcumulados) / Number(meta) ,1))
+  let progreso = Math.min(Number(kilometrosAcumulados) / Number(meta) ,1)
   console.log(historial, kilometrosAcumulados, meta)
   return(
     <View style={style.container}>
       <Text style={style.title}>
         Hola, {data ? data + "!": "desconocido !"}
       </Text>
-      {meta && 
-      <View>
+      { meta>0 ? 
+      <View style={style.progress_container}>
         <Text>
           Metas: {meta}KM  {metaCumplida && <Text>Meta cumplida</Text>}
         </Text>
         <Progress.Bar
-          progress={meta && kilometrosAcumulados ? Math.min(Number(kilometrosAcumulados) / Number(meta) ,1) : 0}
-          width={"100%"}
+          progress={progreso}
+          color={metaCumplida ? "#00ff0d" : "#00ccff"}
+          width={300}
           height={20}
         />
       </View>
-        
-      }
-      {
-        historial && 
+        :
         <Text>
-          Kilometros acumulados : {kilometrosAcumulados}
+          No tienes ninguna meta, quieres ingresar uno?
         </Text>
       }
       <Button onPress={()=>navigation.navigate("RegistrarEntrenamieno")} title="Registrar Entrenamiento"/>
@@ -94,5 +91,9 @@ const style = StyleSheet.create({
     borderRadius:16,
     textAlign: "center",
     backgroundColor: "#3ef9ff"
+  },
+  progress_container:{
+    justifyContent: "center",
+    alignItems:"center"
   }
 })

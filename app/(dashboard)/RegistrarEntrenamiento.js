@@ -102,6 +102,7 @@ function validarDatos (distancia, tiempo){
 
         <TextInput
           keyboardType="numeric"
+          value={distancia}
           style={{
             borderWidth: 1,
             borderBlockColor: "black",
@@ -117,6 +118,7 @@ function validarDatos (distancia, tiempo){
         <TextInput
           keyboardType="numeric"
           onChangeText={setTiempo}
+          value={tiempo}
           style={{
             borderWidth: 1,
             borderBlockColor: "black",
