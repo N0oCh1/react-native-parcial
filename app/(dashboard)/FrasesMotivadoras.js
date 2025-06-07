@@ -28,10 +28,14 @@ export default function FrasesComponente() {
   const [fraseElegida, setFraseElegida] = useState()
   const [mostrarFrase, setMostrarFrase] = useState(true)
 
+  function MostrarFrase() {
+    setMostrarFrase(true)
+    setFraseElegida(frasesMotivadoras[Math.floor(Math.random()*20)])
+  }
   useEffect(()=>{
     setMostrarFrase(true)
     setFraseElegida(frasesMotivadoras[Math.floor(Math.random()*20)])
-  },[fraseElegida])
+  },[])
 
   return (
     <ImageBackground style={style.container}>
@@ -51,7 +55,7 @@ export default function FrasesComponente() {
           </Text>
         </View>
       }
-      <Pressable onPress={()=>setFraseElegida()}>
+      <Pressable onPress={()=>MostrarFrase()}>
         <Text style={{fontSize:200}}>
           👊
         </Text>
