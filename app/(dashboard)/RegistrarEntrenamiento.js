@@ -32,7 +32,7 @@ if(!tiempo|| isNaN(tiempo)||tiempo<=0)
 }
 
   async function GuardarDatos() {
-    if (!validarDatos(distancia,tiempo));
+    if (!validarDatos(distancia,tiempo))return;
     const filePath = FileSystem.documentDirectory + "historial.json";
     // si fecha, distancia y tiempo tenga datos
     if (fecha && distancia && tiempo) {
