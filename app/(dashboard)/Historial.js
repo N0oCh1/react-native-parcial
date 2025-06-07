@@ -24,22 +24,23 @@ export default function HistorialComponente ({navigation}) {
 
   return (
     <View style={style.container}>
-      <Text>
+      <Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", marginBottom:"20"}}>
         Hola este es historial
       </Text>
       {data && 
       <ScrollView >
-        <View style={{gap:12}}>
+        <View style={{gap:12, alignItems:"center"}}>
         {data.map((item,i) => {
           return(
-            <View key={i}>
-              <Text>
-                {`Fecha => ${item.fecha}`}
+            <View style={{backgroundColor: "#00aae4"}} key={i}>
+              <Text style={{fontSize:15, marginBottom:"10"}}>
+                {`Entrenamiento de: ${item.fecha}`}
               </Text>
-              <Text>
+            <View style={style.lines}> </View>
+              <Text style={{fontSize:15}}>
                 {`Distancia => ${item.distancia}Km`}
-              </Text>
-              <Text>
+              </Text >
+              <Text style={{fontSize:15}}>
                 {`Tiempo => ${item.tiempo} Minutos`}
               </Text>
             </View>
@@ -58,12 +59,22 @@ export default function HistorialComponente ({navigation}) {
 }
 const style = StyleSheet.create({
   container: {
+    alignItems:"center",
     marginBottom: 100
   },
     btn_guardar: {
-      width: "100%",
+
+      width: "80%",
+      alignItems:"center",
       paddingBlock:2,
       paddingInline:4,
       backgroundColor:"#2298ff"
+    },
+
+    lines: {
+      width:"100%",
+      height:1,
+      backgroundColor:"blue"
+
     }
   });
