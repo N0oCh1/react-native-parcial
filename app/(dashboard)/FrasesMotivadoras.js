@@ -38,7 +38,7 @@ export default function FrasesComponente() {
   },[])
 
   return (
-    <ImageBackground style={style.container}>
+    <View style={style.container}>
       <LinearGradient 
       colors={["#ff8800", "#00ffff"]}
       start={{x:1, y:0}}
@@ -60,7 +60,7 @@ export default function FrasesComponente() {
           👊
         </Text>
       </Pressable>   
-    </ImageBackground>
+    </View>
   )
 }
 const style = StyleSheet.create({

@@ -56,8 +56,9 @@ export default function PrincipalComponent ({navigation}) {
       { meta>0 ? 
       <View style={style.progress_container}>
         <Text style={{fontSize:25, fontWeight:"bold"}}>
-          🏁 Metas: {meta}KM  {metaCumplida && <Text>Meta cumplida</Text>}
+          🏁 Tu meta: {meta}KM  
         </Text>
+        {metaCumplida && <Text>Meta cumplida !</Text>}
         <Progress.Bar
           progress={progreso}
           color={metaCumplida ? "#00ff0d" : "#00ccff"}
@@ -65,7 +66,7 @@ export default function PrincipalComponent ({navigation}) {
           height={20}
         />
         {kilometrosAcumulados &&
-          <Text>{kilometrosAcumulados.toString()} Km</Text>
+          <Text>{kilometrosAcumulados.toString()} Km  🚶</Text>
         }
       </View>
         :
