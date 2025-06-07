@@ -55,8 +55,8 @@ export default function PrincipalComponent ({navigation}) {
       </Text>
       { meta>0 ? 
       <View style={style.progress_container}>
-        <Text>
-          Metas: {meta}KM  {metaCumplida && <Text>Meta cumplida</Text>}
+        <Text style={{fontSize:25, fontWeight:"bold"}}>
+          🏁 Metas: {meta}KM  {metaCumplida && <Text>Meta cumplida</Text>}
         </Text>
         <Progress.Bar
           progress={progreso}
@@ -64,6 +64,9 @@ export default function PrincipalComponent ({navigation}) {
           width={300}
           height={20}
         />
+        {kilometrosAcumulados &&
+          <Text>{kilometrosAcumulados} Km</Text>
+        }
       </View>
         :
         <Text>
@@ -90,10 +93,17 @@ const style = StyleSheet.create({
     padding:4,
     borderRadius:16,
     textAlign: "center",
-    backgroundColor: "#3ef9ff"
+    borderWidth:2,
+    borderColor:"#008791",
+    color:"#008f99"
   },
   progress_container:{
     justifyContent: "center",
-    alignItems:"center"
+    alignItems:"center",
+    gap:12,
+    borderColor:"#000000",
+    borderWidth:2,
+    paddingBlock:20,
+    borderRadius:16
   }
 })
