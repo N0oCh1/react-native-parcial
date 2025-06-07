@@ -65,7 +65,7 @@ export default function PrincipalComponent ({navigation}) {
           height={20}
         />
         {kilometrosAcumulados &&
-          <Text>{kilometrosAcumulados} Km</Text>
+          <Text>{kilometrosAcumulados.toString()} Km</Text>
         }
       </View>
         :
