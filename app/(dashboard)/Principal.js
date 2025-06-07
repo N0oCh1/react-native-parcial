@@ -22,7 +22,6 @@ export default function PrincipalComponent ({navigation}) {
         setData(value);
       };
       const getHistorialMeta = async() => {
-        kilometrosAcumulados = 0
         try{
           const file = await FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'historial.json');
           if (!file){
@@ -32,7 +31,8 @@ export default function PrincipalComponent ({navigation}) {
           }
           setHistorial(JSON.parse(file));
         }catch(e){
-          console.log(e)
+          setHistorial()
+          kilometrosAcumulados = 0
         }
       }
       getData(); 
@@ -46,16 +46,18 @@ export default function PrincipalComponent ({navigation}) {
   if(kilometrosAcumulados>=meta) {
     metaCumplida = true
   }
+  console.log(kilometrosAcumulados / meta)
 
-  console.log(historial,kilometrosAcumulados)
+  console.log(historial, kilometrosAcumulados)
   return(
     <View>
       <Text>
         Hola, {data ? data + "!": "desconocido !"}
       </Text>
       <Progress.Bar
-        progress={(meta / kilometrosAcumulados)*100} 
+        progress={Math.min(kilometrosAcumulados / meta , 1)}
         width={200}
+        height={20}
       />
       {meta && 
         <Text>

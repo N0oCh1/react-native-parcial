@@ -23,7 +23,7 @@ export default function HistorialComponente ({navigation}) {
   }
 
   return (
-    <View>
+    <View style={style.container}>
       <Text>
         Hola este es historial
       </Text>
@@ -57,6 +57,9 @@ export default function HistorialComponente ({navigation}) {
   )
 }
 const style = StyleSheet.create({
+  container: {
+    marginBottom: 100
+  },
     btn_guardar: {
       width: "100%",
       paddingBlock:2,

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {View, Text, TextInput, Button} from "react-native"
+import {View, Text, TextInput, Button,StyleSheet} from "react-native"
 import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 export default function MetasComponentes({navigation}) {
@@ -17,7 +17,7 @@ export default function MetasComponentes({navigation}) {
   }
   
   return(
-    <View>
+    <View style={style.container}>
       <Text>
         Hola este esta son las metas 
       </Text>
@@ -29,3 +29,6 @@ export default function MetasComponentes({navigation}) {
     </View>
   )
 }
+const style = StyleSheet.create({
+  
+})

@@ -12,6 +12,7 @@ export default function RegistrarComponente () {
   const [fecha, setFecha] = useState(new Date())
   const [distancia, setDistancia] = useState('')
   const [tiempo, setTiempo] = useState('');
+  
   const [show,setShow] = useState(false)
 
   async function GuardarDatos() {
