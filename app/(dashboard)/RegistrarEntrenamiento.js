@@ -10,12 +10,14 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as FileSystem from "expo-file-system";
+import InputConTexto from "../../components/InputConTexto";
+import {LinearGradient} from "expo-linear-gradient";
 
 export default function RegistrarComponente() {
-  
-
   const [fecha, setFecha] = useState(new Date());
-  const formattedFecha = `${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()} ${fecha.toLocaleTimeString()}`;
+  const formattedFecha = `${fecha.getDate()}-${
+    fecha.getMonth() + 1
+  }-${fecha.getFullYear()} ${fecha.toLocaleTimeString()}`;
   const [distancia, setDistancia] = useState("");
   const [tiempo, setTiempo] = useState(0);
   const [show, setShow] = useState(false);
@@ -73,71 +75,69 @@ export default function RegistrarComponente() {
   }
 
   return (
-    <View style={{ alignItems: "center" }}>
-      <Text style={{ fontSize:30, marginBottom:"50"}} >Registrar Entrenamiento</Text>
-      <View>
-        
-        <View style={{ flexDirection:"row", }}>
-          <Text>Fecha:</Text>
-         {fecha && <Text style={{ fontWeight:"bold"}}>{fecha.toDateString()}</Text>}
+    <View style={{position:'relative', flex:1, alignItems:"center"}}>
+      <LinearGradient
+        colors={["#8c00ff", "#ff00c8"]}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={{ width: "100%", height: "100%", position: "absolute",}}
+      />
+      <View style={style.container}>
+        <View>
+          <View style={{ flexDirection: "row" }}>
+            <Text>Fecha:</Text>
+            {fecha && (
+              <Text style={{ fontWeight: "bold" }}>{fecha.toDateString()}</Text>
+            )}
+          </View>
+          <Button title="Seleccionar fecha" onPress={() => setShow(true)} />
+          {show && (
+            <DateTimePicker
+              locale="es-ES"
+              value={fecha}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={(event, date) => {
+                setShow(false);
+                if (date) setFecha(date);
+              }}
+            />
+          )}
         </View>
-        <Button title="Seleccionar fecha" onPress={() => setShow(true)} />
-        {show && (
-          <DateTimePicker
-            locale="es-ES"
-            value={fecha}
-            mode="date"
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            onChange={(event, date) => {
-              setShow(false);
-              if (date) setFecha(date);
-            }}
-          />
-        )}
-      </View>
-      <View style={{width: "80%",margin:10}}>
-        <Text>Distancia:</Text>
+        <View>
+          <Text>Distancia:</Text>
+          <InputConTexto value={distancia} onChange={setDistancia} Texto="Km" />
+        </View>
+        <View>
+          <Text>Tiempo:</Text>
 
-        <TextInput
-          keyboardType="numeric"
-          value={distancia}
-          style={{
-            borderWidth: 1,
-            borderBlockColor: "black",
-            height: 50,
-            width: "100%",
-          }}
-          onChangeText={setDistancia}
-        />
+          <InputConTexto value={tiempo} onChange={setTiempo} Texto="Min" />
+        </View>
+        <Pressable style={style.btn_guardar} onPress={() => GuardarDatos()}>
+          <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
+            Guardar
+          </Text>
+        </Pressable>
       </View>
-      <View style={{width: "80%", margin:20}}>
-        <Text>Tiempo:</Text>
-
-        <TextInput
-          keyboardType="numeric"
-          onChangeText={setTiempo}
-          value={tiempo}
-          style={{
-            borderWidth: 1,
-            borderBlockColor: "black",
-            height: 50,
-            width: "100%",
-          }}
-        />
-      </View>
-      <Pressable style={style.btn_guardar} onPress={() => GuardarDatos()}>
-        <Text>Guardar</Text>
-      </Pressable>
     </View>
   );
 }
 const style = StyleSheet.create({
+  container: {
+    top:100,
+    padding: 20,
+    alignItems: "center",
+    backgroundColor:"#ffffffd5",
+    borderRadius:20,
+    gap: 20,
+  },
   btn_guardar: {
-    width: "80%",
-    paddingBlock: 2,
-    paddingInline: 4,
+    width: 200,
+    paddingBlock: 6,
+    paddingInline: 8,
     backgroundColor: "#2298ff",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 20,
   },
 });
