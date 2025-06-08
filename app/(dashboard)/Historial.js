@@ -40,6 +40,9 @@ export default function HistorialComponente ({navigation}) {
               <Text style={{fontSize:15, marginBottom:10}}>
                 {`Tiempo => ${item.tiempo} Minutos`}
               </Text>
+              <Text style={{fontSize:15, marginBottom:10}}>
+                {`Entrenamiento => ${item.tipo}`}
+              </Text>
             </View>
           )
         })}
@@ -69,6 +72,7 @@ const style = StyleSheet.create({
     padding:20,
     flex:1,
     alignItems:"center",
+    marginBottom:40
     
   },
     btn_guardar: {

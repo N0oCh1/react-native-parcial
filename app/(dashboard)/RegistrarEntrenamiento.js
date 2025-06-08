@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ export default function RegistrarComponente() {
   const [distancia, setDistancia] = useState("");
   const [tiempo, setTiempo] = useState(0);
   const [show, setShow] = useState(false);
+  const [entrenamiento, setEntrenamiento] = useState('');
 
   function validarDatos(distancia, tiempo) {
     if (!distancia || isNaN(distancia) || distancia <= 0) {
@@ -44,6 +45,7 @@ export default function RegistrarComponente() {
         fecha: formattedFecha,
         distancia: distancia,
         tiempo: tiempo,
+        tipo: entrenamiento
       };
 
       try {
@@ -67,6 +69,7 @@ export default function RegistrarComponente() {
       setFecha(new Date());
       setDistancia("");
       setTiempo(0);
+      setEntrenamiento('')
       alert("El datos se guardo correctamente");
       return;
     }
@@ -113,6 +116,16 @@ export default function RegistrarComponente() {
 
           <InputConTexto value={tiempo} onChange={setTiempo} Texto="Min" />
         </View>
+         <View>
+          <Text>Tipo de entrenamiento:</Text>
+
+          <TextInput
+          style={style.input}
+            keyboardType="default"
+            value={entrenamiento}
+            onChangeText={setEntrenamiento}
+          />
+        </View>
         <Pressable style={style.btn_guardar} onPress={() => GuardarDatos()}>
           <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
             Guardar
@@ -140,4 +153,11 @@ const style = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 20,
   },
+  input: {
+    width: 250,
+    borderColor: "#00f7ff",
+    borderWidth: 2,
+    borderRadius:8,
+    backgroundColor: "#ffffff",
+  }
 });

@@ -14,6 +14,7 @@ export default function PrincipalComponent({ navigation }) {
   let kilometrosAcumulados = 0;
   let metaCumplida = false;
 
+  // Obtener los datos del localStora (SharePreference) cade vez que entra en la pagina
   useFocusEffect(
     React.useCallback(() => {
       const getData = async () => {
@@ -28,11 +29,11 @@ export default function PrincipalComponent({ navigation }) {
           );
           if (!file) {
             setHistorial();
-
             return;
           }
           setHistorial(JSON.parse(file));
         } catch (e) {
+      // para cualquier error setea a 0 los vlaores 
           setHistorial();
           kilometrosAcumulados = 0;
         }
@@ -42,21 +43,25 @@ export default function PrincipalComponent({ navigation }) {
     }, [])
   );
 
+  // logica para optiener los kilometros acumulados 
   historial?.map(
     (item) => (kilometrosAcumulados += Number.parseInt(item.distancia))
   );
+  // logica para saber si el usuario llego a la meta 
   if (kilometrosAcumulados >= meta) {
     metaCumplida = true;
   }
+  // logica para saber el progreso 
   let progreso = Math.min(Number(kilometrosAcumulados) / Number(meta), 1);
 
   return (
-    <ScrollView style={style.container}>
-      
+    <View style={style.container}>
       <FondoBonito />
-      <Text style={style.title}>
+      <ScrollView style={{marginTop:30}}>
+        <Text style={style.title}>
         Hola, {data ? data + "!" : "desconocido !"}
       </Text>
+{/* Existe alguna meta?  */}
       {meta > 0 ? (
         <View style={style.progress_container}>
           <Text style={{ fontSize: 25, fontWeight: "bold" }}>
@@ -76,6 +81,7 @@ export default function PrincipalComponent({ navigation }) {
           )}
         </View>
       ) : (
+        // si no existe ninguna meta 
         <View style={style.no_meta}>
           <Text style={{fontSize:20, textAlign:'center'}}>🚩 No tienes ninguna meta, quieres ingresar uno?</Text>
           {kilometrosAcumulados && (
@@ -171,7 +177,8 @@ export default function PrincipalComponent({ navigation }) {
           </Text>
         </Pressable>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 const style = StyleSheet.create({

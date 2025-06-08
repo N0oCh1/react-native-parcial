@@ -18,10 +18,12 @@ export default function App() {
       <Stak.Navigator>
         <Stak.Screen
         name='Home'
+        options={{title:"", headerShown:false}}
         component={HomeComponent}
         />
         <Stak.Screen
         name='principal'
+        options={{title:"", headerShown:false}}
         component={PrincipalComponent}
         />
         <Stak.Screen
@@ -30,14 +32,17 @@ export default function App() {
         />
         <Stak.Screen
         name='FrasesMotivadoras'
+        options={{title:"Frases Motivadoras"}}
         component={FrasesComponente}
         />
         <Stak.Screen
         name='VerHistorial'
+        options={{title:"Historial"}}
         component={HistorialComponente}
         />
         <Stak.Screen
         name='VerMetas'
+        options={{title:"Ingresar Metas"}}
         component={MetasComponentes}
         />
         

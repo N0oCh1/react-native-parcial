@@ -31,7 +31,7 @@ export default function HomeComponent({ navigation }) {
     }).start(async () => {
       await SetData();
       navigation.replace("principal");
-      fadeAnim.setValue(1); // Reset para cuando vuelvas a la pantalla
+      fadeAnim.setValue(1); 
     });
   };
 
@@ -62,7 +62,6 @@ const style = StyleSheet.create({
   contaiiner: {
     flex: 1,
     gap: 12,
-    top:100,
     padding: 20,
     flexDirection: "column",
     alignItems: "center",
@@ -70,6 +69,7 @@ const style = StyleSheet.create({
   },
   form_container: {
     justifyContent: "center",
+    top:200,
     alignItems: "center",
     padding: 32,
     borderRadius: 10,
