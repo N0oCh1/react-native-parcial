@@ -32,7 +32,7 @@ export default function HistorialComponente ({navigation}) {
         <View style={{gap:12, alignItems:"center"}}>
         {data.map((item,i) => {
           return(
-            <View style={{backgroundColor: "#00aae4"}} key={i}>
+            <View style={{}} key={i}>
               <Text style={{fontSize:15, marginBottom:"10"}}>
                 {`Entrenamiento de: ${item.fecha}`}
               </Text>
@@ -40,14 +40,14 @@ export default function HistorialComponente ({navigation}) {
               <Text style={{fontSize:15}}>
                 {`Distancia => ${item.distancia}Km`}
               </Text >
-              <Text style={{fontSize:15}}>
+              <Text style={{fontSize:15, marginBottom:10}}>
                 {`Tiempo => ${item.tiempo} Minutos`}
               </Text>
             </View>
           )
         })}
           <Pressable style={style.btn_guardar} onPress={()=>BorrarHistorial()}>
-            <Text>
+            <Text style={{color:"white"}}>
             Borrar Histroial
             </Text>
           </Pressable>
@@ -63,18 +63,20 @@ const style = StyleSheet.create({
     marginBottom: 100
   },
     btn_guardar: {
-
       width: "80%",
+      height:35,
       alignItems:"center",
+      justifyContent:"center",
+      borderRadius:12,
       paddingBlock:2,
       paddingInline:4,
-      backgroundColor:"#2298ff"
+      backgroundColor:"#c3390f"
     },
 
     lines: {
       width:"100%",
       height:1,
-      backgroundColor:"blue"
+      backgroundColor:"#000"
 
     }
   });
