@@ -30,14 +30,14 @@ export default function HistorialComponente ({navigation}) {
         <View style={{gap:12, alignItems:"center"}}>
         {data.map((item,i) => {
           return(
-            <View style={{backgroundColor: "#00aae4"}} key={i}>
+            <View style={{}} key={i}>
               <Text style={{fontSize:15, marginBottom:"10"}}>
                 Entrenamiento de: {item.fecha}
               </Text>
               <Text style={{fontSize:15}}>
                 {`Distancia => ${item.distancia}Km`}
               </Text >
-              <Text style={{fontSize:15}}>
+              <Text style={{fontSize:15, marginBottom:10}}>
                 {`Tiempo => ${item.tiempo} Minutos`}
               </Text>
             </View>
