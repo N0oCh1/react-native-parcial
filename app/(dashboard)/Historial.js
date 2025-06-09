@@ -26,7 +26,6 @@ export default function HistorialComponente({ navigation }) {
     obtenerDatos();
   }, []);
   console.log(data);
-  
   function BorrarHistorial() {
     FileSystem.deleteAsync(path)
       .then(() => setData([]))
@@ -84,15 +83,17 @@ const style = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     marginBottom: 40,
+    backgroundColor:"#D4D4D4"
   },
 
   card: {
     width:"100%",
     alignItems:"stretch",
-    backgroundColor: "#ffffffd5",
+    backgroundColor: "#FCFDFD",
     padding: 10,
     marginBottom:20,
-    borderRadius: 20,
+    borderRadius: 15,
+    elevation: 7,
   },
   text: {
     color: "#4E4F4F",
