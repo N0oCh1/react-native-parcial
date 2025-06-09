@@ -26,6 +26,7 @@ export default function HistorialComponente({ navigation }) {
     obtenerDatos();
   }, []);
   console.log(data);
+  
   function BorrarHistorial() {
     FileSystem.deleteAsync(path)
       .then(() => setData([]))

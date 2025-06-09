@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BotonGenerico from "../components/BotonGenerico";
 import { useEffect, useState } from "react";
 import {
   View,
@@ -11,6 +12,7 @@ import {
   Animated,
 } from "react-native";
 import FondoBonito from "../components/FondoBonito";
+
 
 export default function HomeComponent({ navigation }) {
   const [text, setText] = useState("");
@@ -39,20 +41,18 @@ export default function HomeComponent({ navigation }) {
     <View style={style.contaiiner}>
       <FondoBonito />
       <Animated.View style={[style.form_container, { opacity: fadeAnim }]}>
-        <Text style={{ fontSize: 45, fontWeight: "bold" }}>Bienvenido!</Text>
-        <Text>Ingrese su nombre</Text>
+        <Text style={{ fontSize: 45, fontWeight: "bold", color:"#4E4F4F" }}>Bienvenido!</Text>
+        <Text style={{  fontWeight: "bold", color:"#4E4F4F" }}>Ingrese su nombre</Text>
         <TextInput
           style={style.input}
           onChangeText={setText}
-          placeholder="Example"
+          placeholder="    Example"
           maxLength={10}
           keyboardType="default"
         />
-        <Pressable style={style.pressable} onPress={handleAcceder}>
-          <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 18 }}>
-            Acceder
-          </Text>
-        </Pressable>
+  
+          <BotonGenerico title="Acceder" border="green" onPress={handleAcceder}/>
+       
       </Animated.View>
     </View>
   );
@@ -68,6 +68,7 @@ const style = StyleSheet.create({
     position: "relative",
   },
   form_container: {
+    width:"100%",
     justifyContent: "center",
     top:200,
     alignItems: "center",
@@ -100,7 +101,7 @@ const style = StyleSheet.create({
     borderColor: "#000000",
     backgroundColor: "#ffffff",
     borderWidth: 2,
-    borderRadius: 8,
+    borderRadius: 20,
     width: 200,
   },
 });
