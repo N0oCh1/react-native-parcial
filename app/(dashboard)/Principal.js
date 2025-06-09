@@ -71,7 +71,9 @@ export default function PrincipalComponent({ navigation }) {
         {/* Existe alguna meta?  */}
         {meta > 0 ? (
           <View style={style.progress_container}>
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>🏁 Tu meta: {meta.toString()}KM</Text>
+            <Text style={{ fontSize: 25, fontWeight: "bold", color:"#4E4F4F" }}>
+              🏁 Tu meta: {meta.toString()}KM
+            </Text>
             {metaCumplida && <Text>Meta cumplida !</Text>}
             <Progress.Bar
               progress={progreso}
@@ -168,7 +170,7 @@ const style = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#008791",
     backgroundColor: "#ffffff",
-    color: "#008f99",
+    color: "#4E4F4F",
   },
   progress_container: {
     marginTop: 20,
@@ -176,7 +178,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     gap: 12,
     backgroundColor: "#ffffff",
-    borderColor: "#000000",
+    borderColor: "#008791",
     borderWidth: 2,
     paddingBlock: 20,
     borderRadius: 16,
