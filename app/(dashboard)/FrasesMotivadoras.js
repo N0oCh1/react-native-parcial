@@ -59,13 +59,14 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+   
   },
   fraseContainer: {
     position: "absolute",
     zIndex: 10,
     backgroundColor: "white",
     top: 100,
-    width: 400,
+    width: "90%",
     padding: 20,
     borderRadius: 16,
   },
