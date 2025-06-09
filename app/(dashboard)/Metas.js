@@ -53,7 +53,8 @@ export default function MetasComponentes({ navigation }) {
           Ingresa la Meta:
         </Text>
       <InputConTexto ref={inputRef} onChange={setTexto} Texto="Km"/>
-      <View style={{alignItems:'center'}}><BotonGenerico title="Guardar" border="#00ccff" onPress={async()=>await GuardarMetas} /></View>
+      <View style={{alignItems:'center'}}>
+        <BotonGenerico title="Guardar" border="#00ccff" onPress={async()=>await GuardarMetas()} /></View>
      
       </View>
       
