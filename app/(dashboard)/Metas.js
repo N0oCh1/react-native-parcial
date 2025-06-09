@@ -10,6 +10,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import InputConTexto from "../../components/InputConTexto";
+import BotonGenerico from "../../components/BotonGenerico";
 
 export default function MetasComponentes({ navigation }) {
   const [texto, setTexto] = useState(0);
@@ -52,10 +53,8 @@ export default function MetasComponentes({ navigation }) {
           Ingresa la Meta:
         </Text>
       <InputConTexto ref={inputRef} onChange={setTexto} Texto="Km"/>
-        <Button
-          title="Guardar metas"
-          onPress={async () => await GuardarMetas()}
-        />
+      <View style={{alignItems:'center'}}><BotonGenerico title="Guardar" border="#00ccff" onPress={async()=>await GuardarMetas} /></View>
+     
       </View>
       
       {modal && (

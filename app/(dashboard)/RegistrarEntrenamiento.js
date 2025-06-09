@@ -11,7 +11,8 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as FileSystem from "expo-file-system";
 import InputConTexto from "../../components/InputConTexto";
-import {LinearGradient} from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
+import BotonGenerico from "../../components/BotonGenerico";
 
 export default function RegistrarComponente() {
   const [fecha, setFecha] = useState(new Date());
@@ -21,7 +22,7 @@ export default function RegistrarComponente() {
   const [distancia, setDistancia] = useState("");
   const [tiempo, setTiempo] = useState(0);
   const [show, setShow] = useState(false);
-  const [entrenamiento, setEntrenamiento] = useState('');
+  const [entrenamiento, setEntrenamiento] = useState("");
 
   function validarDatos(distancia, tiempo) {
     if (!distancia || isNaN(distancia) || distancia <= 0) {
@@ -45,7 +46,7 @@ export default function RegistrarComponente() {
         fecha: formattedFecha,
         distancia: distancia,
         tiempo: tiempo,
-        tipo: entrenamiento
+        tipo: entrenamiento,
       };
 
       try {
@@ -69,7 +70,7 @@ export default function RegistrarComponente() {
       setFecha(new Date());
       setDistancia("");
       setTiempo(0);
-      setEntrenamiento('')
+      setEntrenamiento("");
       alert("El datos se guardo correctamente");
       return;
     }
@@ -78,12 +79,12 @@ export default function RegistrarComponente() {
   }
 
   return (
-    <View style={{position:'relative', flex:1, alignItems:"center"}}>
+    <View style={{ position: "relative", flex: 1, alignItems: "center" }}>
       <LinearGradient
         colors={["#8c00ff", "#ff00c8"]}
         start={{ x: 1, y: 0 }}
         end={{ x: 0, y: 1 }}
-        style={{ width: "100%", height: "100%", position: "absolute",}}
+        style={{ width: "100%", height: "100%", position: "absolute" }}
       />
       <View style={style.container}>
         <View>
@@ -116,48 +117,41 @@ export default function RegistrarComponente() {
 
           <InputConTexto value={tiempo} onChange={setTiempo} Texto="Min" />
         </View>
-         <View>
+        <View>
           <Text>Tipo de entrenamiento:</Text>
 
           <TextInput
-          style={style.input}
+            style={style.input}
             keyboardType="default"
             value={entrenamiento}
             onChangeText={setEntrenamiento}
           />
         </View>
-        <Pressable style={style.btn_guardar} onPress={() => GuardarDatos()}>
-          <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
-            Guardar
-          </Text>
-        </Pressable>
+        <BotonGenerico
+          title="Guardar"
+          border="#00f7ff"
+          onPress={() => GuardarDatos()}
+        />
       </View>
     </View>
   );
 }
 const style = StyleSheet.create({
   container: {
-    top:100,
+    width:"80%",
+    top: 100,
     padding: 20,
     alignItems: "center",
-    backgroundColor:"#ffffffd5",
-    borderRadius:20,
+    backgroundColor: "#ffffffd5",
+    borderRadius: 20,
     gap: 20,
   },
-  btn_guardar: {
-    width: 200,
-    paddingBlock: 6,
-    paddingInline: 8,
-    backgroundColor: "#2298ff",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-  },
+
   input: {
     width: 250,
     borderColor: "#00f7ff",
     borderWidth: 2,
-    borderRadius:8,
+    borderRadius: 18,
     backgroundColor: "#ffffff",
-  }
+  },
 });
