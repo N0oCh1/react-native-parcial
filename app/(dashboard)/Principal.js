@@ -27,8 +27,8 @@ export default function PrincipalComponent({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       const getData = async () => {
-        const value = await AsyncStorage.getItem("userName");
-        setMeta(await AsyncStorage.getItem("meta"));
+        const value = await AsyncStorage.getItem("userName") | "";
+        setMeta(await AsyncStorage.getItem("meta") | 0);
         setData(value);
       };
       const getHistorialMeta = async () => {
@@ -67,15 +67,11 @@ export default function PrincipalComponent({ navigation }) {
     <View style={style.container}>
       <FondoBonito />
       <ScrollView style={{ marginTop: 30 }}>
-        <Text style={style.title}>
-          Hola, {data ? data + "!" : "desconocido !"}
-        </Text>
+        <Text style={style.title}>Hola, {data ? data + "!" : "desconocido !"}</Text>
         {/* Existe alguna meta?  */}
         {meta > 0 ? (
           <View style={style.progress_container}>
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              🏁 Tu meta: {meta.toString()}KM
-            </Text>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>🏁 Tu meta: {meta.toString()}KM</Text>
             {metaCumplida && <Text>Meta cumplida !</Text>}
             <Progress.Bar
               progress={progreso}
@@ -84,21 +80,14 @@ export default function PrincipalComponent({ navigation }) {
               height={20}
             />
             {kilometrosAcumulados && (
-              <Text style={{ fontSize: 16 }}>
-                {kilometrosAcumulados.toString()} Km 🚶
-              </Text>
+              <Text style={{ fontSize: 16 }}>{kilometrosAcumulados.toString()} Km 🚶</Text>
             )}
           </View>
         ) : (
-          // si no existe ninguna meta
           <View style={style.no_meta}>
-            <Text style={{ fontSize: 20, textAlign: "center" }}>
-              🚩 No tienes ninguna meta, quieres ingresar uno?
-            </Text>
+            <Text style={{ fontSize: 20, textAlign: "center" }}>🚩 No tienes ninguna meta, quieres ingresar uno?</Text>
             {kilometrosAcumulados && (
-              <Text style={{ fontSize: 16, textAlign: "center" }}>
-                {kilometrosAcumulados.toString()} Km 🚶
-              </Text>
+              <Text style={{ fontSize: 16, textAlign: "center" }}>{kilometrosAcumulados.toString()} Km 🚶</Text>
             )}
           </View>
         )}
